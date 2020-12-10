@@ -3,7 +3,7 @@
 #include "SBlueprintMergeAssist.h"
 #include "BlueprintMergeData.h"
 
-#include "SDockTab.h"
+#include <Widgets/Docking/SDockTab.h>
 
 #define LOCTEXT_NAMESPACE "FMergeAssistModule"
 

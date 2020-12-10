@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SMergeTreeView.h"
-#include "SlateOptMacros.h"
-#include "EditorStyle.h"
+#include <SlateOptMacros.h>
+#include <EditorStyle.h>
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 

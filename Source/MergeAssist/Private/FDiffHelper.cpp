@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "FDiffHelper.h"
-#include "EdGraph/EdGraph.h"
-#include "EdGraph/EdGraphNode.h"
-#include "EdGraph/EdGraphPin.h"
+#include <EdGraph/EdGraph.h>
+#include <EdGraph/EdGraphNode.h>
+#include <EdGraph/EdGraphPin.h>
 
 #define LOCTEXT_NAMESPACE "DiffHelper"
 

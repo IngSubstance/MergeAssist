@@ -2,10 +2,10 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "DeclarativeSyntaxSupport.h"
-#include "Widgets/SCompoundWidget.h"
-#include "SBox.h"
+#include <CoreMinimal.h>
+#include <Widgets/DeclarativeSyntaxSupport.h>
+#include <Widgets/SCompoundWidget.h>
+#include <Widgets/Layout/SBox.h>
 
 #include "BlueprintMergeData.h"
 #include "Unreal/MergeUtils.h"

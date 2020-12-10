@@ -16,7 +16,7 @@
 	"Modules": [
 		{
 			"Name": "MergeAssist",
-			"Type": "Developer",
+			"Type": "DeveloperTool",
 			"LoadingPhase": "Default"
 		}
 	]

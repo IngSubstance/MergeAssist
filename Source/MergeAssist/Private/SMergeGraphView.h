@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "Widgets/SCompoundWidget.h"
-#include "DeclarativeSyntaxSupport.h"
+#include <CoreMinimal.h>
+#include <Widgets/SCompoundWidget.h>
+#include <Widgets/DeclarativeSyntaxSupport.h>
 #include "BlueprintMergeData.h"
-#include "SBlueprintDiff.h"
+#include <SBlueprintDiff.h>
 
 class FSpawnTabArgs;
 class FTabManager;
