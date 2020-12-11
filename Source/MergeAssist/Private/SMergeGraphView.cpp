@@ -324,8 +324,7 @@ void SMergeGraphView::Construct(const FArguments& InArgs, const FBlueprintMergeD
 
 	for (auto& Panel: DiffPanels)
 	{
-		// @TODO: Move generating the blueprint panel to the Details (blueprint) view once support for this has been added
-		Panel.GenerateMyBlueprintWidget();
+		Panel.GenerateMyBlueprintWidget(); //GenerateMyBlueprintPanel changed in GenerateMyBlueprintWidget
 		Panel.InitializeDiffPanel();
 	}
 
@@ -405,15 +404,16 @@ void SMergeGraphView::FocusGraph(FName GraphName)
 TSharedRef<SDockTab> SMergeGraphView::CreateMergeGraphTab(const FSpawnTabArgs& Args)
 {
 	auto PanelContainer = SNew(SSplitter);
-	//temp luca
-	for (auto Panel : DiffPanels)
+	for (auto& Panel : DiffPanels)
 	{
-		PanelContainer->AddSlot();
-		SAssignNew(Panel.GraphEditorBox, SBox)
+		PanelContainer->AddSlot()
+		[
+			SAssignNew(Panel.GraphEditorBox, SBox)
 			.VAlign(VAlign_Fill)
 			[
 				SBlueprintDiff::DefaultEmptyPanel()
-			];
+			]
+		];
 	}
 
 	return SNew(SDockTab)
