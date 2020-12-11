@@ -2,8 +2,8 @@
 
 #include "GraphMergeHelper.h"
 
-#include "EdGraph/EdGraph.h"
-#include "EdGraphUtilities.h"
+#include <EdGraph/EdGraph.h>
+#include <EdGraphUtilities.h>
 
 #define LOCTEXT_NAMESPACE "GraphMergeHelper"
 
@@ -334,7 +334,10 @@ UEdGraphNode* GraphMergeHelper::FindNodeInTargetGraph(UEdGraphNode* Node)
 	// Check if the node is newly added, in this case we have a direct
 	// mapping between the node and target graph
 	auto** FoundNode = NewNodesInTargetGraph.Find(Node);
-	if (FoundNode) return *FoundNode;
+	if (FoundNode)
+	{
+		return *FoundNode;
+	}
 
 	// If the node is from either the Base, Local, or Remote graphs, translate
 	// it to a node on the base graph
@@ -345,14 +348,19 @@ UEdGraphNode* GraphMergeHelper::FindNodeInTargetGraph(UEdGraphNode* Node)
 	}
 	else if (Node->GetGraph() == LocalGraph)
 	{
-		auto** FoundNode = LocalToBaseNodeMap.Find(Node);
-		if (FoundNode) BaseNode = *FoundNode;
+		FoundNode = LocalToBaseNodeMap.Find(Node);
 	}
 	else if (Node->GetGraph() == RemoteGraph)
 	{
-		auto** FoundNode = RemoteToBaseNodeMap.Find(Node);
+		FoundNode = RemoteToBaseNodeMap.Find(Node);
 		if (FoundNode) BaseNode = *FoundNode;
 	}
+
+	if (FoundNode)
+	{
+		BaseNode = *FoundNode;
+	}
+	
 
 	// If we don't know what node it would be in the base graph, we can't 
 	// determine which node it would be on the target graph

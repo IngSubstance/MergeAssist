@@ -1,15 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SMergeGraphView.h"
-#include "SlateOptMacros.h"
-#include "SSplitter.h"
-#include "SDockTab.h"
-#include "EdGraph/EdGraph.h"
-#include "SBlueprintDiff.h"
-#include "Engine/Blueprint.h"
-#include "SCheckBox.h"
-#include "BlueprintEditor.h"
-#include "BlueprintEditorUtils.h"
+#include <SlateOptMacros.h>
+#include <Widgets/Layout/SSplitter.h>
+#include <Widgets/Docking/SDockTab.h>
+#include <EdGraph/EdGraph.h>
+#include <SBlueprintDiff.h>
+#include <Engine/Blueprint.h>
+#include <Widgets/Input/SCheckBox.h>
+#include <BlueprintEditor.h>
+#include <Kismet2/BlueprintEditorUtils.h>
 #include "GraphMergeHelper.h"
 #include "SMergeTreeView.h"
 
@@ -83,7 +83,13 @@ static UEdGraph* FindGraphByName(UBlueprint const& FromBlueprint, const FName& G
 	FromBlueprint.GetAllGraphs(Graphs);
 
 	UEdGraph* Ret = nullptr;
-	if (UEdGraph** Result = Graphs.FindByPredicate(FMatchFName(GraphName)))
+
+	if (UEdGraph** Result = Graphs.FindByPredicate([GraphName](const UEdGraph* graph)
+		{
+			return graph->GetFName() == GraphName;
+		}
+	
+	))
 	{
 		Ret = *Result;
 	}
@@ -318,8 +324,7 @@ void SMergeGraphView::Construct(const FArguments& InArgs, const FBlueprintMergeD
 
 	for (auto& Panel: DiffPanels)
 	{
-		// @TODO: Move generating the blueprint panel to the Details (blueprint) view once support for this has been added
-		Panel.GenerateMyBlueprintPanel();
+		Panel.GenerateMyBlueprintWidget(); //GenerateMyBlueprintPanel changed in GenerateMyBlueprintWidget
 		Panel.InitializeDiffPanel();
 	}
 
@@ -403,7 +408,7 @@ TSharedRef<SDockTab> SMergeGraphView::CreateMergeGraphTab(const FSpawnTabArgs& A
 	{
 		PanelContainer->AddSlot()
 		[
-			SAssignNew(Panel.GraphEditorBorder, SBox)
+			SAssignNew(Panel.GraphEditorBox, SBox)
 			.VAlign(VAlign_Fill)
 			[
 				SBlueprintDiff::DefaultEmptyPanel()

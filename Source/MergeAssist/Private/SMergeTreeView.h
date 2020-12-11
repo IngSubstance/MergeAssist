@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "Widgets/SCompoundWidget.h"
-#include "DeclarativeSyntaxSupport.h"
+#include <CoreMinimal.h>
+#include <Widgets/SCompoundWidget.h>
+#include <Widgets/DeclarativeSyntaxSupport.h>
 
-#include "STreeView.h"
+#include <Widgets/Views/STreeView.h>
 #include <functional>
 
 struct IMergeTreeEntry
